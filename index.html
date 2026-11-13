@@ -1,298 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a0e27">
-<title>JARVIS</title>
+<title>JARVIS Hindi</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: radial-gradient(ellipse at center, #0f1635 0%, #05070f 100%);
-    color: #e0f7ff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    user-select: none;
+    color: #e0f7ff; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; user-select: none;
   }
-
-  /* Animated background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-  }
-
-  header {
-    text-align: center;
-    padding: 18px 16px 8px;
-    position: relative;
-    z-index: 2;
-  }
-
-  header h1 {
-    font-size: 1.5rem;
-    letter-spacing: 8px;
-    font-weight: 300;
-    color: #4dd0ff;
-    text-shadow: 0 0 12px rgba(77, 208, 255, 0.6);
-  }
-
-  header p {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    color: #4a6a8a;
-    margin-top: 4px;
-    text-transform: uppercase;
-  }
-
-  /* Status pill */
+  header { text-align: center; padding: 18px 16px 8px; position: relative; z-index: 2; }
+  header h1 { font-size: 1.5rem; letter-spacing: 8px; font-weight: 300; color: #4dd0ff; text-shadow: 0 0 12px rgba(77, 208, 255, 0.6); }
+  header p { font-size: 0.7rem; letter-spacing: 3px; color: #4a6a8a; margin-top: 4px; text-transform: uppercase; }
   .status {
-    margin: 8px auto 0;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #4dd0ff;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    border: 1px solid rgba(77, 208, 255, 0.3);
-    border-radius: 20px;
-    background: rgba(77, 208, 255, 0.06);
+    margin: 8px auto 0; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #4dd0ff;
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border: 1px solid rgba(77, 208, 255, 0.3);
+    border-radius: 20px; background: rgba(77, 208, 255, 0.06);
   }
-
-  .status .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #4dd0ff;
-    box-shadow: 0 0 8px #4dd0ff;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  /* Main orb area */
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    padding: 10px;
-    min-height: 0;
-  }
-
-  .orb-wrap {
-    position: relative;
-    width: min(62vw, 260px);
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 8px 0;
-  }
-
-  .ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px solid rgba(77, 208, 255, 0.25);
-    animation: spin 14s linear infinite;
-  }
-  .ring.r2 {
-    inset: 8%;
-    border-color: rgba(0, 255, 200, 0.18);
-    border-style: dashed;
-    animation-duration: 20s;
-    animation-direction: reverse;
-  }
-  .ring.r3 {
-    inset: 16%;
-    border-color: rgba(77, 208, 255, 0.12);
-    animation-duration: 9s;
-  }
+  .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #4dd0ff; box-shadow: 0 0 8px #4dd0ff; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; padding: 10px; min-height: 0; }
+  .orb-wrap { position: relative; width: min(62vw, 260px); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin: 8px 0; }
+  .ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(77, 208, 255, 0.25); animation: spin 14s linear infinite; }
+  .ring.r2 { inset: 8%; border-color: rgba(0, 255, 200, 0.18); border-style: dashed; animation-duration: 20s; animation-direction: reverse; }
+  .ring.r3 { inset: 16%; border-color: rgba(77, 208, 255, 0.12); animation-duration: 9s; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .orb {
-    position: relative;
-    width: 58%;
-    aspect-ratio: 1;
-    border-radius: 50%;
+    position: relative; width: 58%; aspect-ratio: 1; border-radius: 50%;
     background: radial-gradient(circle at 35% 30%, #8fe8ff, #1e9cd8 45%, #0b3a66 100%);
-    box-shadow:
-      0 0 30px rgba(77, 208, 255, 0.5),
-      0 0 80px rgba(30, 156, 216, 0.35),
-      inset 0 0 25px rgba(255, 255, 255, 0.25);
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 0 30px rgba(77, 208, 255, 0.5), 0 0 80px rgba(30, 156, 216, 0.35), inset 0 0 25px rgba(255, 255, 255, 0.25);
+    cursor: pointer; transition: transform 0.15s ease, box-shadow 0.3s ease; display: flex; align-items: center; justify-content: center;
   }
-
   .orb:active { transform: scale(0.94); }
-
-  .orb.listening {
-    animation: listenPulse 1.2s ease-in-out infinite;
-    box-shadow:
-      0 0 40px rgba(0, 255, 200, 0.7),
-      0 0 100px rgba(0, 255, 200, 0.4),
-      inset 0 0 30px rgba(255, 255, 255, 0.35);
-  }
-  @keyframes listenPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.06); }
-  }
-
-  .orb.speaking {
-    animation: speakPulse 0.5s ease-in-out infinite alternate;
-    box-shadow:
-      0 0 45px rgba(120, 180, 255, 0.8),
-      0 0 120px rgba(120, 180, 255, 0.5),
-      inset 0 0 30px rgba(255, 255, 255, 0.4);
-  }
-  @keyframes speakPulse {
-    from { transform: scale(1); filter: brightness(1); }
-    to   { transform: scale(1.04); filter: brightness(1.25); }
-  }
-
-  .orb-icon {
-    font-size: 2rem;
-    filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
-    pointer-events: none;
-  }
-
-  /* Hint under orb */
-  .hint {
-    font-size: 0.78rem;
-    letter-spacing: 1.5px;
-    color: #5b7a9c;
-    text-align: center;
-    margin-top: 12px;
-    min-height: 1.2em;
-  }
-
-  /* Conversation log */
-  .log {
-    flex: 1;
-    width: 100%;
-    max-width: 560px;
-    overflow-y: auto;
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-height: 0;
-    scrollbar-width: none;
-  }
+  .orb.listening { animation: listenPulse 1.2s ease-in-out infinite; box-shadow: 0 0 40px rgba(0, 255, 200, 0.7), 0 0 100px rgba(0, 255, 200, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.35); }
+  @keyframes listenPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  .orb.speaking { animation: speakPulse 0.5s ease-in-out infinite alternate; box-shadow: 0 0 45px rgba(120, 180, 255, 0.8), 0 0 120px rgba(120, 180, 255, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.4); }
+  @keyframes speakPulse { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.04); filter: brightness(1.25); } }
+  .orb-icon { font-size: 2rem; filter: drop-shadow(0 0 6px rgba(255,255,255,0.6)); pointer-events: none; }
+  .hint { font-size: 0.78rem; letter-spacing: 1.5px; color: #5b7a9c; text-align: center; margin-top: 12px; min-height: 1.2em; }
+  .log { flex: 1; width: 100%; max-width: 560px; overflow-y: auto; padding: 8px 16px; display: flex; flex-direction: column; gap: 8px; min-height: 0; scrollbar-width: none; }
   .log::-webkit-scrollbar { display: none; }
-
-  .msg {
-    max-width: 85%;
-    padding: 10px 14px;
-    border-radius: 14px;
-    font-size: 0.88rem;
-    line-height: 1.4;
-    word-wrap: break-word;
-    animation: fadeIn 0.25s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .msg.user {
-    align-self: flex-end;
-    background: rgba(30, 156, 216, 0.18);
-    border: 1px solid rgba(77, 208, 255, 0.25);
-    color: #bfe9ff;
-    border-bottom-right-radius: 4px;
-  }
-
-  .msg.jarvis {
-    align-self: flex-start;
-    background: rgba(0, 255, 200, 0.08);
-    border: 1px solid rgba(0, 255, 200, 0.2);
-    color: #b8fff0;
-    border-bottom-left-radius: 4px;
-  }
-
-  .msg.jarvis::before {
-    content: 'JARVIS';
-    display: block;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    color: #00d4aa;
-    margin-bottom: 3px;
-    opacity: 0.8;
-  }
-
-  /* Bottom controls */
-  footer {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    padding: 10px 16px max(16px, env(safe-area-inset-bottom));
-  }
-
-  .ctrl {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    background: rgba(77, 208, 255, 0.06);
-    border: 1px solid rgba(77, 208, 255, 0.22);
-    border-radius: 14px;
-    padding: 10px 18px;
-    color: #9fd8f5;
-    font-size: 0.68rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 86px;
-  }
+  .msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 0.88rem; line-height: 1.4; word-wrap: break-word; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .msg.user { align-self: flex-end; background: rgba(30, 156, 216, 0.18); border: 1px solid rgba(77, 208, 255, 0.25); color: #bfe9ff; border-bottom-right-radius: 4px; }
+  .msg.jarvis { align-self: flex-start; background: rgba(0, 255, 200, 0.08); border: 1px solid rgba(0, 255, 200, 0.2); color: #b8fff0; border-bottom-left-radius: 4px; }
+  .msg.jarvis::before { content: 'JARVIS'; display: block; font-size: 0.6rem; letter-spacing: 2px; color: #00d4aa; margin-bottom: 3px; opacity: 0.8; }
+  footer { position: relative; z-index: 2; display: flex; justify-content: center; gap: 14px; padding: 10px 16px max(16px, env(safe-area-inset-bottom)); }
+  .ctrl { display: flex; flex-direction: column; align-items: center; gap: 5px; background: rgba(77, 208, 255, 0.06); border: 1px solid rgba(77, 208, 255, 0.22); border-radius: 14px; padding: 10px 18px; color: #9fd8f5; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; min-width: 86px; }
   .ctrl:active { transform: scale(0.95); background: rgba(77, 208, 255, 0.14); }
   .ctrl.off { opacity: 0.4; }
   .ctrl svg { width: 22px; height: 22px; fill: currentColor; }
-
-  /* Unsupported warning */
-  .warn {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(5, 7, 15, 0.95);
-    z-index: 99;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 30px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #ff8b8b;
-  }
+  .warn { display: none; position: fixed; inset: 0; background: rgba(5, 7, 15, 0.95); z-index: 99; align-items: center; justify-content: center; text-align: center; padding: 30px; font-size: 0.95rem; line-height: 1.6; color: #ff8b8b; }
   .warn.show { display: flex; }
-
-  @media (max-height: 640px) {
-    header h1 { font-size: 1.2rem; letter-spacing: 6px; }
-    .orb-wrap { width: min(50vw, 200px); }
-  }
+  @media (max-height: 640px) { header h1 { font-size: 1.2rem; letter-spacing: 6px; } .orb-wrap { width: min(50vw, 200px); } }
 </style>
 </head>
 <body>
@@ -300,7 +63,7 @@
 <header>
   <h1>JARVIS</h1>
   <p>Voice Interface</p>
-  <div class="status"><span class="dot"></span><span id="statusText">Tap orb to start</span></div>
+  <div class="status"><span class="dot"></span><span id="statusText">Shuru karne ke liye tap karein</span></div>
 </header>
 
 <main>
@@ -312,7 +75,7 @@
       <span class="orb-icon">🎙️</span>
     </div>
   </div>
-  <div class="hint" id="hint">Tap the core and speak</div>
+  <div class="hint" id="hint">Core par tap karein aur bolein</div>
 </main>
 
 <div class="log" id="log"></div>
@@ -320,7 +83,7 @@
 <footer>
   <button class="ctrl" id="muteBtn" aria-label="Toggle mute">
     <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
-    <span id="muteLabel">Voice On</span>
+    <span id="muteLabel">Aawaz On</span>
   </button>
   <button class="ctrl" id="clearBtn" aria-label="Clear log">
     <svg viewBox="0 0 24 24"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
@@ -329,8 +92,8 @@
 </footer>
 
 <div class="warn" id="warn">
-  ⚠️ Your browser doesn't support the Web Speech API.<br><br>
-  Please use Chrome, Edge, or Safari on iOS.
+  ⚠️ Aapka browser voice support nahi karta.<br><br>
+  Kripya Chrome ya Safari ka use karein.
 </div>
 
 <script>
@@ -353,17 +116,15 @@
     return;
   }
 
-  /* ---------- State ---------- */
   let recognition   = null;
   let isListening   = false;
   let muted         = false;
   let speaking      = false;
-  let userInteracted = false;   // iOS requires a user gesture before audio
 
-  /* ---------- Speech Recognition ---------- */
+  // --- Speech Recognition (Hindi Setup) ---
   function createRecognition() {
     const r = new SpeechRecognition();
-    r.lang = 'en-US';
+    r.lang = 'hi-IN'; // Language Hindi set ki hai
     r.interimResults = true;
     r.continuous = false;
     r.maxAlternatives = 1;
@@ -371,8 +132,8 @@
     r.onstart = () => {
       isListening = true;
       orb.classList.add('listening');
-      statusText.textContent = 'Listening…';
-      hint.textContent = 'I\'m listening…';
+      statusText.textContent = 'Sun raha hoon…';
+      hint.textContent = 'Main sun raha hoon…';
     };
 
     r.onresult = (event) => {
@@ -388,11 +149,11 @@
     };
 
     r.onerror = (e) => {
-      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-        statusText.textContent = 'Mic blocked';
-        hint.textContent = 'Please allow microphone access.';
+      if (e.error === 'not-allowed') {
+        statusText.textContent = 'Mic band hai';
+        hint.textContent = 'Kripya mic ki permission dein.';
       } else if (e.error === 'no-speech') {
-        hint.textContent = 'Didn\'t catch that. Tap to try again.';
+        hint.textContent = 'Kuch sunai nahi diya. Phir se tap karein.';
       } else if (e.error !== 'aborted') {
         hint.textContent = 'Error: ' + e.error;
       }
@@ -402,8 +163,8 @@
     r.onend = () => {
       stopListening();
       if (!speaking) {
-        statusText.textContent = 'Tap orb to start';
-        hint.textContent = 'Tap the core and speak';
+        statusText.textContent = 'Shuru karne ke liye tap karein';
+        hint.textContent = 'Core par tap karein aur bolein';
       }
     };
 
@@ -412,12 +173,11 @@
 
   function startListening() {
     if (isListening || speaking) return;
-    userInteracted = true;
     recognition = createRecognition();
     try {
       recognition.start();
     } catch (e) {
-      hint.textContent = 'Could not start mic.';
+      hint.textContent = 'Mic start nahi ho paya.';
     }
   }
 
@@ -433,52 +193,43 @@
   function toggleListen() {
     if (isListening) {
       stopListening();
-      statusText.textContent = 'Tap orb to start';
-      hint.textContent = 'Tap the core and speak';
+      statusText.textContent = 'Shuru karne ke liye tap karein';
+      hint.textContent = 'Core par tap karein aur bolein';
     } else {
       startListening();
     }
   }
 
-  /* ---------- Speech Synthesis ---------- */
-  function pickVoice() {
-    const voices = window.speechSynthesis.getVoices();
-    // Prefer a British male-ish voice for that JARVIS feel
-    return (
-      voices.find(v => /Daniel|Google UK English Male|Arthur|Male/i.test(v.name) && /en/i.test(v.lang)) ||
-      voices.find(v => /en-GB/i.test(v.lang)) ||
-      voices.find(v => /en/i.test(v.lang)) ||
-      voices[0] || null
-    );
-  }
-
+  // --- Speech Synthesis (Hindi Aawaz) ---
   function speak(text) {
-    if (muted) {
-      statusText.textContent = 'Muted';
-      return;
-    }
+    if (muted) return;
     if (!('speechSynthesis' in window)) return;
 
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
-    const voice = pickVoice();
+    const voices = window.speechSynthesis.getVoices();
+    
+    // Hindi aawaz dhoondhne ki koshish
+    let voice = voices.find(v => v.lang.includes('hi') || v.name.includes('Hindi'));
+    if (!voice) voice = voices.find(v => v.lang.includes('IN')); // Indian English fallback
     if (voice) utter.voice = voice;
-    utter.rate   = 1.02;
-    utter.pitch  = 0.85;   // slightly lower = more JARVIS-like
+
+    utter.rate   = 1.0;
+    utter.pitch  = 0.9;
     utter.volume = 1;
 
     utter.onstart = () => {
       speaking = true;
       orb.classList.add('speaking');
-      statusText.textContent = 'Speaking…';
+      statusText.textContent = 'Bol raha hoon…';
       hint.textContent = '';
     };
 
     utter.onend = () => {
       speaking = false;
       orb.classList.remove('speaking');
-      statusText.textContent = 'Tap orb to start';
-      hint.textContent = 'Tap the core and speak';
+      statusText.textContent = 'Shuru karne ke liye tap karein';
+      hint.textContent = 'Core par tap karein aur bolein';
     };
 
     utter.onerror = () => {
@@ -489,7 +240,7 @@
     window.speechSynthesis.speak(utter);
   }
 
-  /* ---------- Conversation ---------- */
+  // --- Chat Log ---
   function addMessage(text, who) {
     const el = document.createElement('div');
     el.className = 'msg ' + who;
@@ -500,11 +251,10 @@
 
   function handleUserSpeech(text) {
     addMessage(text, 'user');
-    statusText.textContent = 'Thinking…';
+    statusText.textContent = 'Soch raha hoon…';
     hint.textContent = '';
     stopListening();
 
-    // small delay so the UI updates before the reply
     setTimeout(() => {
       const reply = getReply(text);
       addMessage(reply, 'jarvis');
@@ -512,138 +262,82 @@
     }, 250);
   }
 
-  /* ---------- Simple JARVIS brain ---------- */
+  // --- JARVIS ka Dimaag (Brain) ---
   function getReply(input) {
     const t = input.toLowerCase();
 
-    // Time
-    if (/\b(time|clock)\b/.test(t)) {
-      return 'The current time is ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + '.';
+    // Time / Samay
+    if (t.includes('time') || t.includes('samay') || t.includes('baje')) {
+      const time = new Date().toLocaleTimeString('hi-IN', { hour: '2-digit', minute: '2-digit' });
+      return 'Abhi samay hai ' + time + '.';
     }
 
-    // Date
-    if (/\b(date|today|day is it)\b/.test(t)) {
-      return 'Today is ' + new Date().toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + '.';
+    // Date / Tarikh
+    if (t.includes('date') || t.includes('tarikh') || t.includes('din')) {
+      const date = new Date().toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      return 'Aaj ' + date + ' hai.';
     }
 
-    // Greetings
-    if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/.test(t)) {
-      const h = new Date().getHours();
-      const part = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
-      return part + '. JARVIS at your service. How may I assist you?';
+    // Greetings / Namaste
+    if (t.includes('hello') || t.includes('hi ') || t.includes('hey') || t.includes('namaste') || t.includes('namaskar')) {
+      return 'Namaste! Main JARVIS hoon. Aapki kya sahayata kar sakta hoon?';
     }
 
     // How are you
-    if (/how are you|how're you|how do you feel/.test(t)) {
-      return 'All systems operational. Thank you for asking. How can I help you today?';
-    }
-
-    // Name
-    if (/your name|who are you|what are you/.test(t)) {
-      return 'I am JARVIS — Just A Rather Very Intelligent System. Your voice assistant.';
-    }
-
-    // Identity
-    if (/my name/.test(t) && /what|who/.test(t)) {
-      return 'I don\'t have access to your personal details, but I\'m happy to learn.';
-    }
-
-    // Weather (no API — honest answer)
-    if (/weather|temperature|forecast|rain|sunny/.test(t)) {
-      return 'I don\'t have a live weather feed connected. Try a weather app or enable an API for me.';
+    if (t.includes('kaise ho') || t.includes('kya haal') || t.includes('how are you')) {
+      return 'Main bilkul theek hoon. Aap kaise hain?';
     }
 
     // Joke
-    if (/joke|funny|laugh/.test(t)) {
+    if (t.includes('joke') || t.includes('hasi') || t.includes('chutkula')) {
       const jokes = [
-        'Why did the developer go broke? Because he used up all his cache.',
-        'I would tell you a UDP joke, but you might not get it.',
-        'There are only 10 types of people: those who understand binary and those who don\'t.',
-        'Why do programmers prefer dark mode? Because light attracts bugs.'
+        'Teacher: Tumne homework kyun nahi kiya? Student: Sir, maine socha aap check nahi karoge.',
+        'Ek aadmi doctor ke paas gaya bola: Doctor sahab, mujhe bhoolne ki bimari hai. Doctor: Kab se? Aadmi: Kya kab se?',
+        'Programmer ki shaadi kyun nahi hoti? Kyunki wo hamesha "Try-Catch" me rehta hai.'
       ];
       return jokes[Math.floor(Math.random() * jokes.length)];
     }
 
-    // Open websites
-    const siteMap = {
-      youtube: 'https://www.youtube.com',
-      google: 'https://www.google.com',
-      github: 'https://github.com',
-      gmail: 'https://mail.google.com',
-      maps: 'https://maps.google.com',
-      twitter: 'https://twitter.com',
-      facebook: 'https://facebook.com',
-      instagram: 'https://instagram.com',
-      reddit: 'https://reddit.com'
-    };
-    for (const key in siteMap) {
-      if (t.includes('open ' + key) || t.includes('go to ' + key) || t.includes('launch ' + key)) {
-        window.open(siteMap[key], '_blank');
-        return 'Opening ' + key + '.';
-      }
+    // YouTube / Websites kholna
+    if (t.includes('youtube kholo') || t.includes('open youtube')) {
+      window.open('https://www.youtube.com', '_blank');
+      return 'YouTube khol raha hoon.';
+    }
+    if (t.includes('google kholo') || t.includes('open google')) {
+      window.open('https://www.google.com', '_blank');
+      return 'Google khol raha hoon.';
     }
 
-    // Search
-    const searchMatch = t.match(/^(search|google|look up|find)\s+(.+)/);
-    if (searchMatch) {
-      const q = encodeURIComponent(searchMatch[2]);
-      window.open('https://www.google.com/search?q=' + q, '_blank');
-      return 'Searching for ' + searchMatch[2] + '.';
-    }
-
-    // Math (basic)
-    const mathMatch = t.match(/([\d.]+)\s*([+\-*/x×÷])\s*([\d.]+)/);
-    if (mathMatch) {
-      const a = parseFloat(mathMatch[1]);
-      const b = parseFloat(mathMatch[3]);
-      let op = mathMatch[2];
-      if (op === 'x' || op === '×') op = '*';
-      if (op === '÷') op = '/';
-      let result;
-      switch (op) {
-        case '+': result = a + b; break;
-        case '-': result = a - b; break;
-        case '*': result = a * b; break;
-        case '/': result = b === 0 ? 'undefined (division by zero)' : a / b; break;
+    // Google Search
+    if (t.includes('search karo') || t.includes('dhundo')) {
+      const query = t.replace('search karo', '').replace('dhundo', '').replace('google par', '').trim();
+      if (query) {
+        window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+        return query + ' search kar raha hoon.';
       }
-      return 'That equals ' + result + '.';
-    }
-
-    // Battery
-    if (/battery|power level/.test(t)) {
-      if (navigator.getBattery) {
-        return 'Checking battery status…';
-      }
-      return 'Battery status isn\'t available on this device.';
     }
 
     // Thanks
-    if (/thank|thanks|appreciate/.test(t)) {
-      return 'You\'re most welcome.';
+    if (t.includes('thank') || t.includes('shukriya') || t.includes('dhanyawad')) {
+      return 'Aapka swagat hai.';
     }
 
-    // Goodbye
-    if (/bye|goodbye|see you|shut down|stop/.test(t)) {
-      return 'Goodbye. JARVIS signing off.';
+    // Bye
+    if (t.includes('bye') || t.includes('alvida') || t.includes('band karo')) {
+      return 'Alvida! JARVIS sign off kar raha hai.';
     }
 
-    // Fallback
-    const fallbacks = [
-      'I\'m not sure about that yet, but I\'m learning. Could you rephrase?',
-      'I didn\'t quite catch the intent. Try asking for the time, a joke, or say "open YouTube".',
-      'That\'s beyond my current capabilities. I can handle time, date, jokes, search, and opening sites.',
-      'Interesting. I don\'t have a response for that yet.'
-    ];
-    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    // Default / Fallback
+    return 'Main abhi ye samajh nahi paya. Aap mujhse samay, tarikh, joke ya search ke liye keh sakte hain.';
   }
 
-  /* ---------- Events ---------- */
+  // --- Events ---
   orb.addEventListener('click', toggleListen);
 
   muteBtn.addEventListener('click', () => {
     muted = !muted;
     muteBtn.classList.toggle('off', muted);
-    muteLabel.textContent = muted ? 'Muted' : 'Voice On';
+    muteLabel.textContent = muted ? 'Aawaz Off' : 'Aawaz On';
     if (muted) {
       window.speechSynthesis.cancel();
       speaking = false;
@@ -655,27 +349,19 @@
     logEl.innerHTML = '';
   });
 
-  // Warm up voice list (some browsers load it async)
+  // Load voices
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
   }
 
-  // Stop listening/speaking when the page is hidden
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       stopListening();
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     }
   });
-
-  // Initial greeting hint
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      if (!userInteracted) hint.textContent = 'Tap the core and speak';
-    }, 800);
-  });
 })();
 </script>
 </body>
-  </html>
+</html>
