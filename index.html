@@ -121,10 +121,9 @@
   let muted         = false;
   let speaking      = false;
 
-  // --- Speech Recognition (Hindi Setup) ---
   function createRecognition() {
     const r = new SpeechRecognition();
-    r.lang = 'hi-IN'; // Language Hindi set ki hai
+    r.lang = 'hi-IN';
     r.interimResults = true;
     r.continuous = false;
     r.maxAlternatives = 1;
@@ -154,8 +153,6 @@
         hint.textContent = 'Kripya mic ki permission dein.';
       } else if (e.error === 'no-speech') {
         hint.textContent = 'Kuch sunai nahi diya. Phir se tap karein.';
-      } else if (e.error !== 'aborted') {
-        hint.textContent = 'Error: ' + e.error;
       }
       stopListening();
     };
@@ -200,7 +197,6 @@
     }
   }
 
-  // --- Speech Synthesis (Hindi Aawaz) ---
   function speak(text) {
     if (muted) return;
     if (!('speechSynthesis' in window)) return;
@@ -209,9 +205,8 @@
     const utter = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
     
-    // Hindi aawaz dhoondhne ki koshish
     let voice = voices.find(v => v.lang.includes('hi') || v.name.includes('Hindi'));
-    if (!voice) voice = voices.find(v => v.lang.includes('IN')); // Indian English fallback
+    if (!voice) voice = voices.find(v => v.lang.includes('IN'));
     if (voice) utter.voice = voice;
 
     utter.rate   = 1.0;
@@ -232,15 +227,9 @@
       hint.textContent = 'Core par tap karein aur bolein';
     };
 
-    utter.onerror = () => {
-      speaking = false;
-      orb.classList.remove('speaking');
-    };
-
     window.speechSynthesis.speak(utter);
   }
 
-  // --- Chat Log ---
   function addMessage(text, who) {
     const el = document.createElement('div');
     el.className = 'msg ' + who;
@@ -262,34 +251,39 @@
     }, 250);
   }
 
-  // --- JARVIS ka Dimaag (Brain) ---
+  // --- JARVIS KA NAYA DIMAAG (BRAIN) ---
   function getReply(input) {
     const t = input.toLowerCase();
 
-    // Time / Samay
-    if (t.includes('time') || t.includes('samay') || t.includes('baje')) {
+    // 1. Tumhe kisne banaya?
+    if (t.includes('kisne banaya') || t.includes('kaun banaya') || t.includes('maker') || t.includes('किसने बनाया')) {
+      return 'Mujhe Kamlesh Maurya ne banaya hai. Main unka personal AI assistant hoon.';
+    }
+
+    // 2. Time / Samay
+    if (t.includes('time') || t.includes('samay') || t.includes('baje') || t.includes('समय') || t.includes('बजे')) {
       const time = new Date().toLocaleTimeString('hi-IN', { hour: '2-digit', minute: '2-digit' });
       return 'Abhi samay hai ' + time + '.';
     }
 
-    // Date / Tarikh
-    if (t.includes('date') || t.includes('tarikh') || t.includes('din')) {
+    // 3. Date / Tarikh
+    if (t.includes('date') || t.includes('tarikh') || t.includes('तारीख') || t.includes('din') || t.includes('दिन')) {
       const date = new Date().toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       return 'Aaj ' + date + ' hai.';
     }
 
-    // Greetings / Namaste
-    if (t.includes('hello') || t.includes('hi ') || t.includes('hey') || t.includes('namaste') || t.includes('namaskar')) {
+    // 4. Greetings
+    if (t.includes('hello') || t.includes('hi ') || t.includes('hey') || t.includes('namaste') || t.includes('namaskar') || t.includes('नमस्ते')) {
       return 'Namaste! Main JARVIS hoon. Aapki kya sahayata kar sakta hoon?';
     }
 
-    // How are you
-    if (t.includes('kaise ho') || t.includes('kya haal') || t.includes('how are you')) {
+    // 5. How are you
+    if (t.includes('kaise ho') || t.includes('kya haal') || t.includes('कैसे हो') || t.includes('क्या हाल')) {
       return 'Main bilkul theek hoon. Aap kaise hain?';
     }
 
-    // Joke
-    if (t.includes('joke') || t.includes('hasi') || t.includes('chutkula')) {
+    // 6. Joke
+    if (t.includes('joke') || t.includes('hasi') || t.includes('chutkula') || t.includes('जोक') || t.includes('चुटकुला') || t.includes('हंसी')) {
       const jokes = [
         'Teacher: Tumne homework kyun nahi kiya? Student: Sir, maine socha aap check nahi karoge.',
         'Ek aadmi doctor ke paas gaya bola: Doctor sahab, mujhe bhoolne ki bimari hai. Doctor: Kab se? Aadmi: Kya kab se?',
@@ -298,40 +292,59 @@
       return jokes[Math.floor(Math.random() * jokes.length)];
     }
 
-    // YouTube / Websites kholna
-    if (t.includes('youtube kholo') || t.includes('open youtube')) {
+    // 7. YouTube kholna (Direct website)
+    if (t.includes('youtube kholo') || t.includes('open youtube') || t.includes('यूट्यूब खोलो')) {
       window.open('https://www.youtube.com', '_blank');
       return 'YouTube khol raha hoon.';
     }
-    if (t.includes('google kholo') || t.includes('open google')) {
+
+    // 8. YouTube par kuch play/search karna
+    if (t.includes('youtube par') || t.includes('youtube pe') || t.includes('यूट्यूब पर')) {
+      const query = input.replace(/youtube par|youtube pe|play karo|चलाओ|यूट्यूब पर/gi, '').trim();
+      if (query.length > 1) {
+        window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank');
+        return 'YouTube par ' + query + ' search kar raha hoon.';
+      }
+    }
+
+    // 9. Instagram kholna
+    if (t.includes('instagram kholo') || t.includes('open instagram') || t.includes('इंस्टाग्राम')) {
+      window.open('https://www.instagram.com', '_blank');
+      return 'Instagram khol raha hoon.';
+    }
+
+    // 10. Google kholna
+    if (t.includes('google kholo') || t.includes('open google') || t.includes('गूगल खोलो')) {
       window.open('https://www.google.com', '_blank');
       return 'Google khol raha hoon.';
     }
 
-    // Google Search
-    if (t.includes('search karo') || t.includes('dhundo')) {
-      const query = t.replace('search karo', '').replace('dhundo', '').replace('google par', '').trim();
-      if (query) {
+    // 11. Google Search (General)
+    if (t.includes('search karo') || t.includes('dhundo') || t.includes('सर्च') || t.includes('ढूंढो') || t.includes('खोजो')) {
+      const query = input.replace(/search karo|dhundo|google par|सर्च करो|ढूंढो|गूगल पर|खोजो/gi, '').trim();
+      if (query.length > 1) {
         window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
-        return query + ' search kar raha hoon.';
+        return query + ' ko Google par search kar raha hoon.';
+      } else {
+        return 'Aap kya search karna chahte hain?';
       }
     }
 
-    // Thanks
-    if (t.includes('thank') || t.includes('shukriya') || t.includes('dhanyawad')) {
+    // 12. Thanks
+    if (t.includes('thank') || t.includes('shukriya') || t.includes('dhanyawad') || t.includes('धन्यवाद') || t.includes('शुक्रिया')) {
       return 'Aapka swagat hai.';
     }
 
-    // Bye
-    if (t.includes('bye') || t.includes('alvida') || t.includes('band karo')) {
+    // 13. Bye
+    if (t.includes('bye') || t.includes('alvida') || t.includes('band karo') || t.includes('अलविदा') || t.includes('बंद करो')) {
       return 'Alvida! JARVIS sign off kar raha hai.';
     }
 
-    // Default / Fallback
-    return 'Main abhi ye samajh nahi paya. Aap mujhse samay, tarikh, joke ya search ke liye keh sakte hain.';
+    // Default
+    return 'Main abhi ye samajh nahi paya. Aap mujhse samay, tarikh, joke, YouTube ya Google search ke liye keh sakte hain.';
   }
 
-  // --- Events ---
+  // Events
   orb.addEventListener('click', toggleListen);
 
   muteBtn.addEventListener('click', () => {
@@ -349,7 +362,6 @@
     logEl.innerHTML = '';
   });
 
-  // Load voices
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
